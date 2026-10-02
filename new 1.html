@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>A Little Letter For You ♡</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: #f3e3c3;
+    color: #4b3526;
+    font-family: "Cormorant Garamond", serif;
+    overflow-x: hidden;
+}
+
+/* Floating hearts */
+
+.heart {
+    position: fixed;
+    color: rgba(125, 67, 67, 0.35);
+    font-size: 22px;
+    animation: float 7s infinite ease-in-out;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.heart:nth-child(1) {
+    left: 10%;
+    top: 15%;
+}
+
+.heart:nth-child(2) {
+    left: 85%;
+    top: 25%;
+    animation-delay: 2s;
+}
+
+.heart:nth-child(3) {
+    left: 20%;
+    top: 75%;
+    animation-delay: 4s;
+}
+
+.heart:nth-child(4) {
+    left: 75%;
+    top: 80%;
+    animation-delay: 1s;
+}
+
+@keyframes float {
+    0%,100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-25px);
+    }
+}
+
+/* Pages */
+
+.page {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 18px;
+    position: relative;
+    z-index: 1;
+}
+
+#letterPage,
+#timelinePage {
+    display: none;
+}
+
+/* Main page */
+
+.main-card {
+    width: 100%;
+    max-width: 650px;
+    text-align: center;
+    background: #f8edcf;
+    padding: 55px 30px;
+    border: 2px solid #9a7457;
+    box-shadow:
+        0 10px 30px rgba(75, 53, 38, 0.25),
+        inset 0 0 0 8px rgba(154, 116, 87, 0.08);
+    position: relative;
+}
+
+.main-card::before {
+    content: "♡";
+    position: absolute;
+    top: 12px;
+    left: 18px;
+    font-size: 28px;
+}
+
+.main-card::after {
+    content: "♡";
+    position: absolute;
+    bottom: 12px;
+    right: 18px;
+    font-size: 28px;
+}
+
+.sticker {
+    font-size: 45px;
+    margin-bottom: 10px;
+}
+
+.title {
+    font-family: "Great Vibes", cursive;
+    font-size: clamp(42px, 8vw, 70px);
+    color: #713f3f;
+    margin: 10px 0;
+}
+
+.subtitle {
+    font-size: 22px;
+    margin-bottom: 35px;
+}
+
+/* Buttons */
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-top: 25px;
+    min-height: 80px;
+}
+
+button {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 19px;
+    border: 1px solid #8b6047;
+    padding: 11px 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.yes-btn {
+    background: #7d4b4b;
+    color: white;
+}
+
+.no-btn {
+    background: #f4e4c1;
+    color: #563c2d;
+}
+
+/* Letter */
+
+.letter-wrapper {
+    width: 100%;
+    max-width: 850px;
+}
+
+.letter {
+    background: #f8edcf;
+    padding: clamp(30px, 7vw, 70px);
+    border: 3px double #8d674d;
+    box-shadow: 0 12px 35px rgba(70, 45, 30, 0.3);
+    position: relative;
+}
+
+.letter::before {
+    content: "💌";
+    position: absolute;
+    top: -22px;
+    right: 20px;
+    font-size: 45px;
+}
+
+.letter-title {
+    font-family: "Great Vibes", cursive;
+    text-align: center;
+    font-size: clamp(42px, 7vw, 65px);
+    color: #713f3f;
+    margin-bottom: 35px;
+}
+
+.letter-content {
+    font-size: 21px;
+    line-height: 1.75;
+}
+
+.letter-content p {
+    margin-bottom: 20px;
+}
+
+.signature {
+    font-family: "Great Vibes", cursive;
+    font-size: 38px;
+    color: #713f3f;
+    text-align: right;
+    margin-top: 35px;
+}
+
+/* Navigation */
+
+.navigation {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    margin-top: 35px;
+}
+
+.nav-btn {
+    background: #f0dfbd;
+    color: #563c2d;
+    border: 1px solid #8b6047;
+}
+
+/* Timeline */
+
+.timeline-wrapper {
+    width: 100%;
+    max-width: 900px;
+}
+
+.timeline-title {
+    font-family: "Great Vibes", cursive;
+    font-size: clamp(45px, 8vw, 70px);
+    text-align: center;
+    color: #713f3f;
+    margin-bottom: 45px;
+}
+
+.timeline {
+    position: relative;
+    padding: 10px 0;
+}
+
+.timeline::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: #9a7457;
+    transform: translateX(-50%);
+}
+
+.timeline-item {
+    width: 50%;
+    padding: 15px 35px;
+    position: relative;
+}
+
+.timeline-item:nth-child(odd) {
+    left: 0;
+    text-align: right;
+}
+
+.timeline-item:nth-child(even) {
+    left: 50%;
+    text-align: left;
+}
+
+.timeline-item::after {
+    content: "♡";
+    position: absolute;
+    top: 18px;
+    width: 32px;
+    height: 32px;
+    background: #f8e9c9;
+    border: 1px solid #8d674d;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #713f3f;
+    font-size: 17px;
+}
+
+.timeline-item:nth-child(odd)::after {
+    right: -16px;
+}
+
+.timeline-item:nth-child(even)::after {
+    left: -16px;
+}
+
+.timeline-card {
+    background: #f8edcf;
+    border: 1px solid #9a7457;
+    padding: 20px;
+    box-shadow: 0 5px 15px rgba(75,53,38,0.15);
+}
+
+.timeline-card h3 {
+    margin: 0 0 8px;
+    color: #713f3f;
+    font-size: 25px;
+}
+
+.timeline-card p {
+    margin: 0;
+    font-size: 19px;
+    line-height: 1.5;
+}
+
+.timeline-end {
+    text-align: center;
+    font-family: "Great Vibes", cursive;
+    font-size: 40px;
+    color: #713f3f;
+    margin-top: 30px;
+}
+
+/* Mobile */
+
+@media (max-width: 650px) {
+
+    .page {
+        padding: 20px 12px;
+    }
+
+    .main-card {
+        padding: 45px 20px;
+    }
+
+    .subtitle {
+        font-size: 20px;
+    }
+
+    .buttons {
+        gap: 5px;
+    }
+
+    button {
+        padding: 10px 20px;
+    }
+
+    .letter-content {
+        font-size: 19px;
+    }
+
+    .navigation {
+        flex-direction: column;
+    }
+
+    .timeline::before {
+        left: 15px;
+    }
+
+    .timeline-item,
+    .timeline-item:nth-child(even) {
+        width: 100%;
+        left: 0;
+        padding-left: 50px;
+        padding-right: 5px;
+        text-align: left;
+    }
+
+    .timeline-item:nth-child(odd)::after,
+    .timeline-item:nth-child(even)::after {
+        left: -1px;
+        right: auto;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- Floating hearts -->
+
+<div class="heart">♡</div>
+<div class="heart">♡</div>
+<div class="heart">♡</div>
+<div class="heart">♡</div>
+
+
+<!-- ================= HOME PAGE ================= -->
+
+<section class="page" id="homePage">
+
+    <div class="main-card">
+
+        <div class="sticker">🧸 💌</div>
+
+        <h1 class="title">A Little Something For You</h1>
+
+        <p class="subtitle">
+            Will you read the letter from your girlfriend? ♡
+        </p>
+
+        <div class="buttons">
+
+            <button
+                class="yes-btn"
+                id="yesBtn"
+                onclick="openLetter()">
+                Yes ♡
+            </button>
+
+            <button
+                class="no-btn"
+                id="noBtn"
+                onclick="sayNo()">
+                No
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= LETTER PAGE ================= -->
+
+<section class="page" id="letterPage">
+
+    <div class="letter-wrapper">
+
+        <div class="letter">
+
+            <h1 class="letter-title">♡</h1>
+
+           
+
+            <div class="letter-content">
+
+                <p>
+                    Dear you,
+                </p>
+
+                <p>
+                    Happy Boyfriend's Day to my favourite person. ♡
+                </p>
+
+                <p>
+                    I don't think I say it enough, but I'm really glad
+                    that somehow, out of all the people in the world,
+                    we found each other.
+                </p>
+
+                <p>
+                    What started with random conversations slowly turned
+					into something I never expected — you becoming such 
+					an important part of my life, someone I look forward
+					to talking to, laughing with, annoying, and sharing
+					all my random thoughts with.
+                </p>
+
+                <p>
+                    We've had our cute moments, our stupid fights,
+                    our random chaos and everything in between.
+                    And honestly, that's what makes this feel like us.
+                </p>
+
+                <p>
+                    Thank you for all the little things, the memories,
+                    the conversations and simply for being you.
+                </p>
+				
+				<p>
+				I don't know what the future holds,but right now
+				I'm just really happy that we're here,
+				together, making these memories.
+				Here's to everything we've already lived through
+                and all the little memories still waiting for us. ♡
+                </p>
+
+                <p>
+                    Happy Boyfriend's Day.
+                </p>
+
+            </div>
+
+            <div class="signature">
+                Yours ♡
+            </div>
+
+        </div>
+
+
+        <div class="navigation">
+
+            <button
+                class="nav-btn"
+                onclick="goHome()">
+                ↶ Read that again
+            </button>
+
+            <button
+                class="nav-btn"
+                onclick="openTimeline()">
+                There's more... → ♡
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= TIMELINE PAGE ================= -->
+
+<section class="page" id="timelinePage">
+
+    <div class="timeline-wrapper">
+
+        <h1 class="timeline-title">
+            Our Little Timeline 🥰💘
+        </h1>
+
+        <div class="timeline">
+
+
+            <div class="timeline-item">
+
+                <div class="timeline-card">
+
+                    <h3>The Beginning</h3>
+
+                    <p>
+                        It all started on
+						29 June 2025 —
+						when our friends thought we should talk
+						and somehow, that little suggestion
+						turned into something so much more. ♡
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="timeline-item">
+
+                <div class="timeline-card">
+
+                    <h3>That One Memory</h3>
+
+                    <p>
+                        Before we were even dating,I remember 
+						thinking that you're kind of boring and 
+						nonchalant but then you put a song on your 
+                        Instagram note.I remember finding it 
+						kind of cute.♡
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="timeline-item">
+
+                <div class="timeline-card">
+
+                <h3>Our Relationship...</h3>
+
+                    <p>
+                        And then came
+                        <strong>7 August 2025</strong>.
+                        You asked me out,
+                        and I said yes.
+                        And just like that,
+                        we became <i>us</i>. ♡
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="timeline-item">
+
+                <div class="timeline-card">
+
+
+					<h3>Our first date</h3>
+
+                    <p>
+                     Then came our first date — 18 October 2025. 
+					We went to the mall, spent the day together, 
+					and you even got me a diary with a little letter inside.
+					Honestly, such a cute day to remember and much more. ♡
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="timeline-item">
+
+                <div class="timeline-card">
+
+                    <h3>Us Now</h3>
+
+                    <p>
+					More than a year of love, friendship, fights,
+					chaos, laughter, memories and a lot of random
+					stuff in between. Can't believe we've actually
+					been doing this for more than a year now though.♡
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="timeline-item">
+
+                <div class="timeline-card">
+
+                    <h3>To Be Continued ...</h3>
+
+                   
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="timeline-end">
+            ♡
+        </div>
+
+
+        <div class="navigation">
+
+            <button
+                class="nav-btn"
+                onclick="goHome()">
+                ↶ Back to the beginning
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<script>
+
+let noClicks = 0;
+
+const yesBtn = document.getElementById("yesBtn");
+const noBtn = document.getElementById("noBtn");
+
+
+/* ================= NO BUTTON ================= */
+
+function sayNo() {
+
+    noClicks++;
+
+    let yesScale = 1 + (noClicks * 0.45);
+    let noScale = Math.max(0.55, 1 - (noClicks * 0.12));
+
+    yesBtn.style.transform = `scale(${yesScale})`;
+    noBtn.style.transform = `scale(${noScale})`;
+
+    if (noClicks >= 4) {
+        yesBtn.style.transform = "scale(3)";
+        noBtn.style.opacity = "0.55";
+    }
+}
+
+
+/* ================= OPEN LETTER ================= */
+
+function openLetter() {
+
+    document.getElementById("homePage").style.display = "none";
+
+    document.getElementById("letterPage").style.display = "flex";
+
+    document.getElementById("timelinePage").style.display = "none";
+
+    /* RESET YES BUTTON */
+
+    yesBtn.style.transform = "scale(1)";
+    noBtn.style.transform = "scale(1)";
+    noBtn.style.opacity = "1";
+
+    noClicks = 0;
+
+    window.scrollTo(0, 0);
+}
+
+
+/* ================= OPEN TIMELINE ================= */
+
+function openTimeline() {
+
+    document.getElementById("homePage").style.display = "none";
+
+    document.getElementById("letterPage").style.display = "none";
+
+    document.getElementById("timelinePage").style.display = "flex";
+
+    window.scrollTo(0, 0);
+}
+
+
+/* ================= BACK HOME ================= */
+
+function goHome() {
+
+    document.getElementById("homePage").style.display = "flex";
+
+    document.getElementById("letterPage").style.display = "none";
+
+    document.getElementById("timelinePage").style.display = "none";
+
+    /* RESET EVERYTHING */
+
+    yesBtn.style.transform = "scale(1)";
+    noBtn.style.transform = "scale(1)";
+    noBtn.style.opacity = "1";
+
+    noClicks = 0;
+
+    window.scrollTo(0, 0);
+}
+
+</script>
+
+</body>
+</html>
+
